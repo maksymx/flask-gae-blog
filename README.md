@@ -1,12 +1,8 @@
-Flask on App Engine Project Template
-====================================
+My Flask Google App Engine-powered blog
+=======================================
 
-Boilerplate project template for running a Flask-based application on
+[Started from here][here]. This is a Flask-based blog example on
 Google App Engine (Python)
-
-Python 2.7 Runtime Support
---------------------------
-* Support for the Python 2.7 runtime was added to this project in May 2012.
 
 
 About Flask
@@ -19,7 +15,7 @@ See <http://flask.pocoo.org> for more info.
 
 Setup/Configuration
 -------------------
-1. Download this repository via
+1. Download parent repository via
    `git clone https://github.com/kamalgill/flask-appengine-template.git`
    or download the tarball at
    <http://github.com/kamalgill/flask-appengine-template/tarball/master>
@@ -254,3 +250,4 @@ HTML5 detection provided by [Modernizr 2][modernizr] (configured with all featur
 [profiler]: http://packages.python.org/Flask-GAE-Mini-Profiler/
 [wz]: http://werkzeug.pocoo.org/
 [wzda]: https://github.com/nshah/werkzeug-debugger-appengine
+[here]: https://github.com/kamalgill/flask-appengine-template
