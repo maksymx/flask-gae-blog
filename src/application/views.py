@@ -13,28 +13,38 @@ from google.appengine.runtime.apiproxy_errors import CapabilityDisabledError
 
 from lib.flask import request, render_template, flash, url_for, redirect
 from lib.flask_cache import Cache
-
 from application import app
-from decorators import login_required, admin_required
+from decorators import admin_required
 from models import Post
+from pagination import Pagination
 
 
 # Flask-Cache (configured to use App Engine Memcache API)
 cache = Cache(app)
 
+
 def home():
+    # import pdb; pdb.set_trace()
     posts = Post.query()
-    return render_template('base.html', posts=posts)
+    p = request.args.get('page')
+    page = int(p) if p else 1
+    pagination = Pagination(page, 4, posts)
+
+    # print ">>>>", pagination.items.fetch_async()
+    return render_template('base.html', posts=posts, pagination=pagination)
+
 
 def say_hello(username):
     """Contrived example to demonstrate Flask's url routing capabilities"""
     return 'Hello %s' % username
+
 
 @admin_required
 def admin_only():
     """This view requires an admin account"""
     posts = Post.query()
     return render_template("admin/admin.html", posts=posts)
+
 
 @admin_required
 def add_post():
@@ -52,6 +62,7 @@ def add_post():
             return redirect(url_for('home'))
     return render_template("admin/add_post.html")
 
+
 @admin_required
 def edit_post(pid):
     """This view requires an admin account"""
@@ -63,6 +74,7 @@ def edit_post(pid):
         flash(u'Post %s successfully saved.' % pid, 'success')
         return redirect(url_for('admin_only'))
     return render_template("admin/update_post.html", post=post)
+
 
 @admin_required
 def delete_post(pid):
@@ -79,6 +91,7 @@ def delete_post(pid):
     if request.method == "DELETE":
         pass
 
+
 def post_detailed(pid):
     post = Post.get_by_id(pid)
     return render_template("post.html", post=post)
@@ -86,7 +99,7 @@ def post_detailed(pid):
 
 # @cache.cached(timeout=60)
 # def cached_examples():
-#     """This view should be cached for 60 sec"""
+# """This view should be cached for 60 sec"""
 #     examples = ExampleModel.query()
 #     return render_template('list_examples_cached.html', examples=examples)
 

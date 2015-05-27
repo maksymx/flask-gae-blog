@@ -1,3 +1,4 @@
+{% from "_pagination.html" import render_pagination %}
 <!doctype html>
 <html lang="en" class="no-js">
 <head>
@@ -39,9 +40,13 @@
 <!-- .cd-main -->
 
 <div>
-    <ul>
+    {{ render_pagination(pagination, "home") }}
+</div>
 
-    </ul>
+<div>
+    {% for p in pagination.iter_pages() %}
+        <p>{{ p }}</p>
+    {% endfor %}
 </div>
 
 <div class="cd-folding-panel">
