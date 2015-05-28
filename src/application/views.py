@@ -16,7 +16,7 @@ from lib.flask_cache import Cache
 from application import app
 from decorators import admin_required
 from models import Post
-from pagination import Pagination
+from ndbpager import Pager
 
 
 # Flask-Cache (configured to use App Engine Memcache API)
@@ -24,14 +24,14 @@ cache = Cache(app)
 
 
 def home():
-    # import pdb; pdb.set_trace()
     posts = Post.query()
-    p = request.args.get('page')
-    page = int(p) if p else 1
-    pagination = Pagination(page, 4, posts)
+    requested_page = request.args.get('page')
+    page = int(requested_page) if requested_page else 1
+    
+    pager = Pager(query=posts, page=page)
+    articles_for_page, _, _ = pager.paginate(page_size=4)
 
-    # print ">>>>", pagination.items.fetch_async()
-    return render_template('base.html', posts=posts, pagination=pagination)
+    return render_template('base.html', posts=articles_for_page, pager=pager)
 
 
 def say_hello(username):

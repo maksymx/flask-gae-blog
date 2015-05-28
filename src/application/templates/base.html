@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href='http://fonts.googleapis.com/css?family=Vollkorn|Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" href="/static/css/reset.css">
     <!-- CSS reset -->
     <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/pagination_style.css">
     <!-- Resource style -->
     <script src="/static/js/modernizr.js"></script>
     <!-- Modernizr -->
@@ -40,27 +42,9 @@
 <!-- .cd-main -->
 
 <div>
-    {{ render_pagination(pagination, "home") }}
+    {{ render_pagination(pager) }}
 </div>
 
-<div>
-    {% for p in pagination.iter_pages() %}
-        <p>{{ p }}</p>
-    {% endfor %}
-</div>
+            <div class="cd-folding-panel"><div class="fold-left"></div><!-- this is the left fold --><div class="fold-right"></div><!-- this is the right fold --><div class="cd-fold-content"><!-- content will be loaded using javascript --></div><a class="cd-close" href="#"></a></div><!-- .cd-folding-panel -->
 
-<div class="cd-folding-panel">
-    <div class="fold-left"></div>
-    <!-- this is the left fold -->
-    <div class="fold-right"></div>
-    <!-- this is the right fold -->
-    <div class="cd-fold-content"><!-- content will be loaded using javascript --></div>
-    <a class="cd-close" href="#"></a>
-</div>
-<!-- .cd-folding-panel -->
-
-<script src="/static/js/jquery-2.1.1.js"></script>
-<script src="/static/js/main.js"></script>
-<!-- Resource jQuery -->
-</body>
-</html>
+            <script src="/static/js/jquery-2.1.1.js"></script><script src="/static/js/main.js"></script><!-- Resource jQuery --></body></html>
