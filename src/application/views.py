@@ -24,7 +24,7 @@ cache = Cache(app)
 
 
 def home():
-    posts = Post.query()
+    posts = Post.query().order(-Post.created_at)
     requested_page = request.args.get('page')
     page = int(requested_page) if requested_page else 1
     
@@ -42,7 +42,7 @@ def say_hello(username):
 @admin_required
 def admin_only():
     """This view requires an admin account"""
-    posts = Post.query()
+    posts = Post.query().order(-Post.created_at)
     return render_template("admin/admin.html", posts=posts)
 
 
