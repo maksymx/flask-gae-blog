@@ -15,7 +15,7 @@
 <body>
 <div class="cd-fold-content single-page">
     <h2>{{ post.title }}</h2>
-    <em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, laboriosam?</em>
+    <em>Created at: {{ post.created_at }}</em>
 
     {% autoescape off %}
     {{ post.body }}
